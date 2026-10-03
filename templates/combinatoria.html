@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4">
+            <h2 class="mb-4 text-warning">Combinatoria: Asientos en el Cine</h2>
+            <p class="text-muted">Dos varones y tres chicas van al cine y encuentran 5 asientos juntos, todos en la misma fila. ¿De cuántas formas diferentes pueden sentarse si las 3 chicas no quieren estar una al lado de la otra?</p>
+            <p class="text-muted">Ingresa el número de varones y chicas para calcular las formas posibles de acomodarse en los asientos.</p>
+            <form method="POST" action="/combinatoria">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label class="form-label">Número de Varones</label>
+                        <input type="number" name="varones" class="form-control" value="{{ resultado.varones if resultado else 2 }}" min="1" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Número de Chicas</label>
+                        <input type="number" name="chicas" class="form-control" value="{{ resultado.chicas if resultado else 3 }}" min="1" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 btn-lg text-white">Calcular Formas </button>
+            </form>
+
+            {% if resultado %}
+                <hr class="my-4">
+                {% if resultado.error %}
+                    <div class="alert alert-danger">Error: {{ resultado.error }}</div>
+                {% else %}
+                    <div class="alert alert-success">
+                        <h4 class="mb-3">Procedimiento (Método del Complemento):</h4>
+                        
+                        <p><strong>1. Total de formas sin restricciones:</strong><br>
+                        Las {{ resultado.varones + resultado.chicas }} personas en total pueden acomodarse de: 
+                        <br><span class="fs-5">{{ resultado.total_permutaciones }} formas</span>.</p>
+                        
+                        <p><strong>2. Casos prohibidos (las {{ resultado.chicas }} chicas juntas):</strong><br>
+                        Si tratamos a las chicas como un solo bloque, las formas en que se pueden acomodar junto con los varones, multiplicadas por las formas en que se acomodan entre ellas mismas, es: 
+                        <br><span class="fs-5">{{ resultado.casos_prohibidos }} formas</span>.</p>
+                        
+                        <hr>
+                        
+                        <p class="mb-1"><strong>3. Cálculo final (Total - Prohibidos):</strong></p>
+                        <h3 class="mt-2 text-success">
+                            {{ resultado.total_permutaciones }} - {{ resultado.casos_prohibidos }} = <strong>{{ resultado.total }} formas</strong>
+                        </h3>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

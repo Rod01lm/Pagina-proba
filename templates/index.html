@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row text-center mt-5">
+    <div class="col-12 mb-4">
+        <h1 class="display-4 fw-bold text-primary">Plataforma Interactiva</h1>
+        <p class="lead text-muted">Selecciona el módulo que deseas utilizar para resolver los problemas dinámicamente.</p>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4">
+            <h3 class="card-title text-success">📊 Bayes</h3>
+            <p class="card-text">Calcula la probabilidad de que uno delos 3 planos analíticos de diseño resulte defectuoso.</p>
+            <a href="/bayes" class="btn btn-outline-success mt-auto">Abrir Calculadora</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4">
+            <h3 class="card-title text-warning">🍿 Combinatoria</h3>
+            <p class="card-text">Calcula las formas en que varones y chicas pueden sentarse en el cine interactuando con las variables.</p>
+            <a href="/combinatoria" class="btn btn-outline-warning mt-auto">Abrir Calculadora</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4" style="border: 2px solid #1976d2;">
+            <h3 class="card-title text-primary">⚙️ Simulador de Lote</h3>
+            <p class="card-text">Visualiza de forma gráfica el comportamiento de la extracción de muestras y el teorema de Bayes.</p>
+            <a href="/simulador" class="btn btn-primary mt-auto">Abrir Simulador</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

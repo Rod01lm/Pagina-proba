@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row mb-2">
+    <div class="col-12">
+        <h2 class="text-dark">¿Qué contiene el lote?</h2>
+        <p class="text-muted small">20 componentes - muestra de 2 sin reemplazo - probabilidades iniciales: 60%, 30%, 10%</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Panel Izquierdo -->
+    <div class="col-md-5">
+        <div class="card p-3 mb-3 bg-light">
+            <h6 class="mb-3">Nuevo lote con composición oculta. Extrae dos componentes para probarlos.</h6>
+            <div id="grid-componentes" class="lote-grid mb-3">
+                <!-- Generado por JS -->
+            </div>
+            <p class="small text-muted mb-3">
+                Gris: oculto | <span class="text-success">Verde/B: bueno</span> | <span class="text-danger">Rojo/D: defectuoso</span><br>
+                Borde azul: pertenece a la muestra.
+            </p>
+            <div class="d-grid gap-2">
+                <button class="btn btn-outline-secondary" onclick="iniciarLote()">Nuevo lote aleatorio</button>
+                <button class="btn btn-primary" onclick="extraerYProbar()">Extraer y probar 2</button>
+                <button class="btn btn-outline-info" onclick="revelarLote()">Revelar lote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Derecho -->
+    <div class="col-md-7">
+        <div class="card p-3 h-100">
+            <h6 class="mb-3 border-bottom pb-2">Combinaciones y Teorema de Bayes</h6>
+            
+            <div class="table-responsive">
+                <table class="table table-sm text-center table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>D en lote</th>
+                            <th>P(D=d)</th>
+                            <th>P(K=k | D=d)</th>
+                            <th>P(D=d | K=k)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td><td>60%</td><td id="cond-0">Sin muestra</td><td id="post-0" class="fw-bold">Sin muestra</td>
+                        </tr>
+                        <tr>
+                            <td>1</td><td>30%</td><td id="cond-1">Sin muestra</td><td id="post-1" class="fw-bold">Sin muestra</td>
+                        </tr>
+                        <tr>
+                            <td>2</td><td>10%</td><td id="cond-2">Sin muestra</td><td id="post-2" class="fw-bold">Sin muestra</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Barras -->
+            <div class="mt-2 mb-4">
+                <div class="row align-items-center mb-2">
+                    <div class="col-3 small text-end">0 defectuosos</div>
+                    <div class="col-9">
+                        <div class="progress"><div id="bar-0" class="progress-bar bg-primary" style="width: 60%;">60.00%</div></div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-2">
+                    <div class="col-3 small text-end">1 defectuosos</div>
+                    <div class="col-9">
+                        <div class="progress"><div id="bar-1" class="progress-bar bg-primary" style="width: 30%;">30.00%</div></div>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-2">
+                    <div class="col-3 small text-end">2 defectuosos</div>
+                    <div class="col-9">
+                        <div class="progress"><div id="bar-2" class="progress-bar bg-primary" style="width: 10%;">10.00%</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="border-bottom pb-1">Desarrollo paso a paso </h6>
+            <textarea id="consola-pasos" class="form-control consola" rows="8" readonly></textarea>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='lote.js') }}"></script>
+{% endblock %}

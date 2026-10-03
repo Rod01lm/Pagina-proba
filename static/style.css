@@ -1,0 +1,53 @@
+
+body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-2px);
+}
+/* Grid del simulador */
+.lote-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+.componente {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    margin: 0 auto;
+}
+.comp-bueno { background-color: #a5d6a7; }
+.comp-malo { background-color: #ef9a9a; }
+.comp-muestra { border-color: #1976d2; }
+.progress { height: 25px; font-size: 14px; }
+textarea.consola {
+    font-family: monospace;
+    font-size: 13px;
+    background: #fdfdfd;
+}

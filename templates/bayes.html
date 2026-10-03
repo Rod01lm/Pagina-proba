@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card p-4">
+            <h2 class="mb-4 text-primary">Teorema de Bayes: Planos Analíticos</h2>
+                
+<p class="text-muted">
+    Una empresa de manufactura emplea tres planos analíticos (P<sub>1</sub>, P<sub>2</sub>, P<sub>3</sub>) utilizados al 30%, 20% y 50% respectivamente. 
+    Las tasas de defectos son P(D | P<sub>1</sub>) = 0.01, P(D | P<sub>2</sub>) = 0.03, y P(D | P<sub>3</sub>) = 0.02. 
+    Si se descubre un producto defectuoso, ¿cuál plano tiene más probabilidades de haber sido utilizado?
+</p>
+
+            <form method="POST" action="/bayes">
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h5>Plano 1 (P1)</h5>
+                        <label>Uso (%)</label>
+                        <input type="number" step="0.1" name="p1" class="form-control mb-2" value="{{ resultado.p1 if resultado else 30 }}" required>
+                        <label>Defectos (%)</label>
+                        <input type="number" step="0.01" name="dp1" class="form-control" value="{{ resultado.dp1 if resultado else 1 }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Plano 2 (P2)</h5>
+                        <label>Uso (%)</label>
+                        <input type="number" step="0.1" name="p2" class="form-control mb-2" value="{{ resultado.p2 if resultado else 20 }}" required>
+                        <label>Defectos (%)</label>
+                        <input type="number" step="0.01" name="dp2" class="form-control" value="{{ resultado.dp2 if resultado else 3 }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Plano 3 (P3)</h5>
+                        <label>Uso (%)</label>
+                        <input type="number" step="0.1" name="p3" class="form-control mb-2" value="{{ resultado.p3 if resultado else 50 }}" required>
+                        <label>Defectos (%)</label>
+                        <input type="number" step="0.01" name="dp3" class="form-control" value="{{ resultado.dp3 if resultado else 2 }}" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 btn-lg">Calcular Probabilidades </button>
+            </form>
+
+            {% if resultado %}
+                <hr class="my-4">
+                <div class="alert alert-info">
+                    <h4>Resultados Calculados:</h4>
+                    <p>Probabilidad total de defectos P(D) = <strong>{{ resultado.p_d }}%</strong></p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if resultado.responsable == 1 %}bg-success text-white{% endif %}">
+                            Probabilidad de que sea P1 dado un defecto P(P1|D):
+                            <span class="badge bg-primary rounded-pill">{{ resultado.post_p1 }}%</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if resultado.responsable == 2 %}bg-success text-white{% endif %}">
+                            Probabilidad de que sea P2 dado un defecto P(P2|D):
+                            <span class="badge bg-primary rounded-pill">{{ resultado.post_p2 }}%</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center {% if resultado.responsable == 3 %}bg-success text-white{% endif %}">
+                            Probabilidad de que sea P3 dado un defecto P(P3|D):
+                            <span class="badge bg-primary rounded-pill">{{ resultado.post_p3 }}%</span>
+                        </li>
+                    </ul>
+                    <h5 class="text-success">✅ El plano más probable de ser el responsable es el P{{ resultado.responsable }}</h5>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
